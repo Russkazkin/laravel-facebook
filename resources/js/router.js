@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import {START} from "vue-router/src/util/route";
+import Start from "./views/Start";
 
 Vue.use(VueRouter);
 
@@ -9,7 +9,7 @@ export default new VueRouter({
 
     routes: [
         {
-            path: '/', name: 'home', component: START
+            path: '/', name: 'home', component: Start
         },
     ],
 });

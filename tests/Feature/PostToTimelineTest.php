@@ -29,6 +29,6 @@ class PostToTimelineTest extends TestCase
 
         $post = Post::first();
 
-        $response->assertStatus('201');
+        $response->assertStatus(201);
     }
 }

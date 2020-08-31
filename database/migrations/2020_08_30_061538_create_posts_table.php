@@ -15,6 +15,8 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained();
+            $table->text('body');
             $table->timestamps();
         });
     }
@@ -26,6 +28,9 @@ class CreatePostsTable extends Migration
      */
     public function down()
     {
+        Schema::table('posts', function (Blueprint $table){
+            $table->dropForeign(['user_id']);
+        });
         Schema::dropIfExists('posts');
     }
 }

@@ -40,7 +40,18 @@ class PostController extends Controller
         ]);
 
         $post = request()->user()->posts()->create($data['data']['attributes']);
-        return response([], 201);
+        return response([
+            'data' => [
+                'type' => 'posts',
+                'post_id' => $post->id,
+                'attributes' => [
+                    'body' => $post->body,
+                ],
+            ],
+            'links' => [
+                'self' => url('/posts/' . $post->id),
+            ],
+        ], 201);
     }
 
     /**

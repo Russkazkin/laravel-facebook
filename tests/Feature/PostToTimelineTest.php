@@ -29,6 +29,8 @@ class PostToTimelineTest extends TestCase
 
         $post = Post::first();
 
+        $this->assertEquals($user->id, $post->user_id);
+        $this->assertEquals('Testing Body', $post->body);
         $response->assertStatus(201)->assertJson([
             'data' => [
                 'type' => 'posts',

@@ -33,8 +33,13 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
+        $data = request()->validate([
+            'body' => '',
+        ]);
+
+        $post = request()->user()->posts()->create($data);
         return response([], 201);
     }
 

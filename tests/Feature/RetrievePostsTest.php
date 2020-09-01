@@ -46,4 +46,21 @@ class RetrievePostsTest extends TestCase
             ]
         ]);
     }
+
+    /** @test */
+    public function a_users_can_only_retrieve_their_posts()
+    {
+        $this->withoutExceptionHandling();
+        $this->actingAs($user = factory(User::class)->create(), 'api');
+        $post = factory(Post::class)->create();
+
+        $response = $this->get('/api/posts');
+
+        $response->assertStatus(200)->assertExactJson([
+            'data' => [],
+            'links' => [
+                'self' => url('/posts'),
+            ],
+        ]);
+    }
 }

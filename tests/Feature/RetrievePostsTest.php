@@ -14,7 +14,8 @@ class RetrievePostsTest extends TestCase
     /** @test */
     public function a_user_can_retrieve_posts()
     {
-        $this->actingAs($user = factory(User::class)->create());
+        $this->withoutExceptionHandling();
+        $this->actingAs($user = factory(User::class)->create(), 'api');
         $posts = factory(Post::class, 2)->create();
 
         $response = $this->get('/api/posts');

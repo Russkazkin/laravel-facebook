@@ -3,7 +3,7 @@
     <div class="flex justify-between items-center">
         <div>
             <div>
-                <img class="w-8 h-8 object-cover rounded-full" src="https://lh3.googleusercontent.com/proxy/OoFZ3u04kwDsQyUa2JVmHumg0GjjB2APpU599p_QZBjfV9CiNRwN8-v7LZ3FzBqal4u6e3FoVAmvL5fphvpKgvlnzu1Nfq70q83epmANqWL8qn8i_qis1DL8mDUdsqxFWee6Gtif4Qfya_o" alt="profile image">
+                <img class="w-8 h-8 object-cover rounded-full" src="https://thispersondoesnotexist.com/image" alt="profile image">
             </div>
         </div>
         <div class="flex-1 mx-4">

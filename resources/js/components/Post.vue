@@ -7,7 +7,7 @@
             </div>
             <div class="text-sm ml-6">
                 <div class="font-bold">
-                    User Name
+                    {{ post.data.attributes.posted_by.data.attributes.name }}
                 </div>
                 <div class="text-gray-600">
                     12 min
@@ -16,7 +16,7 @@
         </div>
         <div class="mt-4">
             <p>
-                Not having fan at all ;)
+                {{ post.data.attributes.body }}
             </p>
         </div>
     </div>
@@ -51,7 +51,10 @@
 
 <script>
 export default {
-    name: "Post"
+    name: "Post",
+    props: {
+        post: Object,
+    },
 }
 </script>
 

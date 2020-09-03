@@ -1,7 +1,7 @@
 <template>
 <div class="flex flex-col items-center py-4">
     <NewPost/>
-    <Post/>
+    <Post v-for="post in posts" :key="post.data.post_id" :post="post"/>
 </div>
 </template>
 
@@ -22,7 +22,7 @@ export default {
     },
     async mounted() {
         try {
-            this.posts = (await axios.get('/api/posts')).data;
+            this.posts = (await axios.get('/api/posts')).data.data;
         } catch (error) {
             console.log('Unable to fetch posts, ' + error.status)
         } finally {

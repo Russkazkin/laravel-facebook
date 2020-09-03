@@ -10,7 +10,7 @@
                     {{ post.data.attributes.posted_by.data.attributes.name }}
                 </div>
                 <div class="text-gray-600">
-                    12 min
+                    {{ post.data.attributes.posted_at }}
                 </div>
             </div>
         </div>

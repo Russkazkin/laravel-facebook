@@ -14,7 +14,21 @@ export default {
     components: {
         NewPost,
         Post,
-    }
+    },
+    data() {
+        return {
+            posts: null,
+        }
+    },
+    async mounted() {
+        try {
+            this.posts = (await axios.get('/api/posts')).data;
+        } catch (error) {
+            console.log('Unable to fetch posts, ' + error.status)
+        } finally {
+
+        }
+    },
 }
 </script>
 

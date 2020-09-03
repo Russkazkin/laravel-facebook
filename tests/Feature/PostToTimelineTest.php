@@ -23,6 +23,8 @@ class PostToTimelineTest extends TestCase
                 'type' => 'posts',
                 'attributes' => [
                     'body' => 'Testing Body',
+                    'user_id' => $user->id,
+                    'image' => 'image.jpg'
                 ],
             ],
         ]);

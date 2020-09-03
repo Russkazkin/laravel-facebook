@@ -56,7 +56,8 @@ class RetrievePostsTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $this->actingAs($user = factory(User::class)->create(), 'api');
-        $post = factory(Post::class)->create();
+        $post = factory(Post::class)->make();
+        factory(User::class)->create()->posts()->save($post);
 
         $response = $this->get('/api/posts');
 

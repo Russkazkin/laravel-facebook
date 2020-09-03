@@ -21,7 +21,7 @@
         </div>
     </div>
     <div class="w-full">
-        <img class="w-full" src="https://i.ytimg.com/vi/c7oV1T2j5mc/maxresdefault.jpg" alt="landscape image">
+        <img class="w-full" :src="post.data.attributes.image" alt="landscape image">
     </div>
     <div class="flex px-4 pt-2 justify-between text-gray-700 text-sm">
         <div>

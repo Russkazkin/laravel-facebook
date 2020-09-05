@@ -1,8 +1,8 @@
 <template>
 <div class="flex flex-col items-center">
-    <div class="relative">
+    <div class="relative mb-8">
         <div class="w-100 h-64 overflow-hidden z-10">
-            <img class="object-cover w-full" src="https://images.unsplash.com/photo-1530790359200-e2cac35c770d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2555&q=80" alt="user profile wallpaper">
+            <img class="object-cover w-full" src="https://photographylife.com/wp-content/uploads/2017/01/What-is-landscape-photography.jpg" alt="user profile wallpaper">
         </div>
         <div class="absolute flex items-center bottom-0 left-0 -mb-8 ml-12 z-20">
             <div class="w-32">
@@ -15,12 +15,20 @@
             </p>
         </div>
     </div>
+    <p v-if="loading">Loading posts...</p>
+    <Post v-for="post in posts" :key="post.data.post_id" :post="post" v-else />
+    <p v-if="!loading && posts.length < 1">No posts found</p>
 </div>
 </template>
 
 <script>
+import Post from "../../components/Post";
+
 export default {
     name: "Show",
+    components: {
+        Post
+    },
     data() {
         return {
             loading: true,
@@ -31,7 +39,7 @@ export default {
     async mounted() {
         try {
             this.user = (await axios.get('/api/users/' + this.$route.params.userId)).data;
-            this.posts = (await axios.get('/api/users/' + this.$route.params.userId + '/posts')).data;
+            this.posts = (await axios.get('/api/users/' + this.$route.params.userId + '/posts')).data.data;
         } catch (error) {
             console.log('Unable to fetch data, ' + error.status)
         } finally {

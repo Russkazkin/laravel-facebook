@@ -82,6 +82,9 @@ class UserCanViewProfileTest extends TestCase
                         ]
                     ],
                 ],
+            ],
+            'links' => [
+                'self' => url('/posts'),
             ]
         ]);
     }

@@ -63,6 +63,9 @@ class UserCanViewProfileTest extends TestCase
                             ],
                         ]
                     ],
+                    'links' => [
+                        'self' => url('/posts/' . $posts->last()->id),
+                    ]
                 ],
                 [
                     'data' => [
@@ -81,6 +84,9 @@ class UserCanViewProfileTest extends TestCase
                             ],
                         ]
                     ],
+                    'links' => [
+                        'self' => url('/posts/' . $posts->first()->id),
+                    ]
                 ],
             ],
             'links' => [

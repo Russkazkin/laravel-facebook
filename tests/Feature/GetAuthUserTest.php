@@ -20,13 +20,13 @@ class GetAuthUserTest extends TestCase
 
         $response->assertStatus(200)->assertJson([
             'data' => [
+                'user_id' => $user->id,
                 'attributes' => [
                     'name' => $user->name,
-                    'user_id' => $user->id,
                 ],
             ],
             'links' => [
-                'self' => url('/user/' . $user->id),
+                'self' => url('/users/' . $user->id),
             ],
         ]);
     }

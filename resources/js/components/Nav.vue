@@ -42,7 +42,22 @@
 
 <script>
 export default {
-name: "Nav"
+    name: "Nav",
+    data() {
+        return {
+            user: null,
+        }
+    },
+    async mounted() {
+        try {
+            this.user = (await axios.get('/api/auth-user')).data;
+        } catch (error) {
+            console.log('Unable to fetch auth user, ' + error.status);
+        } finally {
+
+        }
+    }
+
 }
 </script>
 

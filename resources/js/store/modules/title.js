@@ -12,6 +12,7 @@ const actions = {
 const mutations = {
     setTitle(state, title) {
         state.title = title + ' | Facebook';
+        document.title = state.title;
     }
 };
 

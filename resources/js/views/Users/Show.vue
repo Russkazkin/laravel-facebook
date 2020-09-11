@@ -10,7 +10,10 @@
                      alt="user profile img"
                      class="object-cover w-32 h-32 border-4 border-gray-200 rounded-full shadow-lg">
             </div>
-            <p class="ml-4 text-gray-100 text-2xl text-shadow">
+            <p v-if="loading" class="ml-4 text-gray-100 text-2xl text-shadow">
+                Loading...
+            </p>
+            <p v-else class="ml-4 text-gray-100 text-2xl text-shadow">
                 {{ user.data.attributes.name }}
             </p>
         </div>

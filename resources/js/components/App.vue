@@ -23,8 +23,11 @@ export default {
     mounted() {
         this.$store.dispatch("fetchAuthUser");
     },
+    created() {
+        this.$store.dispatch("setPageTitle", this.$route.meta.title);
+    },
     watch: {
-        $route(to, from) {
+        $route(to) {
             this.$store.dispatch("setPageTitle", to.meta.title);
         }
     }

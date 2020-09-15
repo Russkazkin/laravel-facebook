@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\FriendResource;
 use App\Models\Friend;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class FriendRequestController extends Controller
 {
@@ -15,5 +15,11 @@ class FriendRequestController extends Controller
         ]);
 
         User::find($data['friend_id'])->friends()->attach(auth()->user());
+
+        return new FriendResource(Friend::where([
+            'user_id' => auth()->user()->id,
+            'friend_id' => $data['friend_id'],
+            ])->first()
+        );
    }
 }

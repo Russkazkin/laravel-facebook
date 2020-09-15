@@ -38,6 +38,8 @@ use Laravel\Passport\HasApiTokens;
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Post[] $posts
  * @property-read int|null $posts_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|User[] $friends
+ * @property-read int|null $friends_count
  */
 class User extends Authenticatable
 {

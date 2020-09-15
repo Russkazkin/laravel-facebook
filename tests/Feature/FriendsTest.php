@@ -22,5 +22,9 @@ class FriendsTest extends TestCase
         ]);
 
         $response->assertStatus(200);
+
+        $friendRequest = Friend::first();
+
+        $this->assertNotNull($friendRequest);
     }
 }

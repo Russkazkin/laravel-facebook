@@ -14,6 +14,6 @@ class FriendRequestController extends Controller
             'friend_id' => '',
         ]);
 
-        Friend::create($data);
+        User::find($data['friend_id'])->friends()->attach(auth()->user());
    }
 }

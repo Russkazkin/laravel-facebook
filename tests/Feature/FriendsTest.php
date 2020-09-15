@@ -27,5 +27,7 @@ class FriendsTest extends TestCase
         $friendRequest = Friend::first();
 
         $this->assertNotNull($friendRequest);
+        $this->assertEquals($anotherUser->id, $friendRequest->friend_id);
+        $this->assertEquals($user->id, $friendRequest->user_id);
     }
 }

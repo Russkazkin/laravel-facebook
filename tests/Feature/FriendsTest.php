@@ -17,10 +17,10 @@ class FriendsTest extends TestCase
         $this->actingAs($user = factory(User::class)->create(), 'api');
         $anotherUser = factory(User::class)->create();
 
-        $responce = $this->post('/api/friend-request', [
+        $response = $this->post('/api/friend-request', [
             'friend_id' => $anotherUser->id,
         ]);
 
-        $responce->assertStatus(200);
+        $response->assertStatus(200);
     }
 }

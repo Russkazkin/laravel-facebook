@@ -54,6 +54,14 @@ class FriendsTest extends TestCase
 
         $response->assertStatus(404);
 
-        $this->assertNotNull(Friend::first());
+        $this->assertNull(Friend::first());
+
+        $response->assertJson([
+            'errors' => [
+                'code' => 404,
+                'title' => 'User Not Found',
+                'detail' => 'Unable to locate the user with the given information.',
+            ],
+        ]);
     }
 }

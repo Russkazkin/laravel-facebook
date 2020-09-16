@@ -14,7 +14,7 @@ class FriendRequestController extends Controller
             'friend_id' => '',
         ]);
 
-        User::find($data['friend_id'])->friends()->attach(auth()->user());
+        User::findOrFail($data['friend_id'])->friends()->attach(auth()->user());
 
         return new FriendResource(Friend::where([
             'user_id' => auth()->user()->id,

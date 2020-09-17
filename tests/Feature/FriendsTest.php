@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Friend;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -88,8 +89,21 @@ class FriendsTest extends TestCase
         $friendRequest = Friend::first();
 
         $this->assertNotNull($friendRequest->confirmed_at);
-
-        $this->assertEquals(now(), $friendRequest->confirmed_at);
+        $this->assertInstanceOf(Carbon::class, $friendRequest->confirmed_at);
+        $this->assertEquals(now()->startOfSecond(), $friendRequest->confirmed_at);
         $this->assertEquals(1, $friendRequest->status);
+
+        $response->assertJson([
+            'data' => [
+                'type' => 'friend-request',
+                'friend_request_id' => $friendRequest->id,
+                'attributes' => [
+                    'confirmed_at' => $friendRequest->confirmed_at->diffForHumans(),
+                ],
+            ],
+            'links' => [
+                'self' => '/users/' . $anotherUser->id,
+            ],
+        ]);
     }
 }

@@ -14,5 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Friend extends Model
 {
-    public $guarded = [];
+    protected $guarded = [];
+
+    protected $dates = ['confirmed_at'];
 }

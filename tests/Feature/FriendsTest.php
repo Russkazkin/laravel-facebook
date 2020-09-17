@@ -80,7 +80,7 @@ class FriendsTest extends TestCase
         $response = $this->actingAs($anotherUser, 'api')
             ->post('/api/friend-request-response', [
                 'user_id' => $user->id,
-                'state' => 1,
+                'status' => 1,
             ]);
 
         $response->assertStatus(200);
@@ -89,5 +89,7 @@ class FriendsTest extends TestCase
 
         $this->assertNotNull($friendRequest->confirmed_at);
 
+        $this->assertEquals(now(), $friendRequest->confirmed_at);
+        $this->assertEquals(1, $friendRequest->status);
     }
 }

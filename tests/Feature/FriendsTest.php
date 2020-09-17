@@ -77,7 +77,7 @@ class FriendsTest extends TestCase
             'friend_id' => $anotherUser->id,
         ])->assertStatus(200);;
 
-        $response = $this->actingAs($this->actingAs($anotherUser, 'api'))
+        $response = $this->actingAs($anotherUser, 'api')
             ->post('/api/friend-request-response', [
                 'user_id' => $user->id,
                 'state' => 1,

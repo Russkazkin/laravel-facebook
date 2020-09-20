@@ -119,5 +119,12 @@ class FriendsTest extends TestCase
         $this->assertNull(Friend::first());
         $response->assertNotFound();
 
+        $response->assertJson([
+            'errors' => [
+                'code' => 404,
+                'title' => 'Friend Request Not Found',
+                'detail' => 'Unable to locate the friend request with the given information.',
+            ],
+        ]);
     }
 }

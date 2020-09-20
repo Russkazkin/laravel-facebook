@@ -4,7 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 
-class UserNotFoundException extends Exception
+class FriendRequestNotFoundException extends Exception
 {
     /**
      * Render the exception as an HTTP response.
@@ -17,8 +17,8 @@ class UserNotFoundException extends Exception
         return response()->json([
             'errors' => [
                 'code' => 404,
-                'title' => 'Friend Request Not Found',
-                'detail' => 'Unable to locate the friend request with the given information.',
+                'title' => 'User Not Found',
+                'detail' => 'Unable to locate the user with the given information.',
             ],
         ], 404);
     }

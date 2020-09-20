@@ -104,4 +104,20 @@ class FriendsTest extends TestCase
             ],
         ]);
     }
+
+    /** @test  */
+    public function only_valid_friend_requests_can_be_accepted()
+    {
+        $anotherUser = factory(User::class)->create();
+
+        $response = $this->actingAs($anotherUser, 'api')
+            ->post('/api/friend-request-response', [
+                'user_id' => 123,
+                'status' => 1,
+            ]);
+
+        $this->assertNull(Friend::first());
+        $response->assertNotFound();
+
+    }
 }

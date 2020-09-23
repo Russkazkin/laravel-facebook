@@ -7,14 +7,26 @@ use App\Http\Resources\FriendResource;
 use App\Models\Friend;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Validation\ValidationException;
 
 class FriendRequestController extends Controller
 {
    public function store()
    {
-        $data = request()->validate([
-            'friend_id' => '',
-        ]);
+       try {
+           $data = request()->validate([
+               'friend_id' => 'required',
+           ]);
+       } catch (ValidationException $e) {
+           return response()->json([
+               'errors' => [
+                   'code' => 422,
+                   'title' => 'Validation Error',
+                   'detail' => 'Your request is malformed or missing fields.',
+                   'meta' => $e->errors(),
+               ],
+           ], 422);
+       }
 
        try {
            User::findOrFail($data['friend_id'])->friends()->attach(auth()->user());

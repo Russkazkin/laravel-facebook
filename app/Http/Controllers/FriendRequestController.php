@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\UserNotFoundException;
+use App\Exceptions\ValidationErrorException;
 use App\Http\Resources\FriendResource;
 use App\Models\Friend;
 use App\Models\User;
@@ -18,14 +19,7 @@ class FriendRequestController extends Controller
                'friend_id' => 'required',
            ]);
        } catch (ValidationException $e) {
-           return response()->json([
-               'errors' => [
-                   'code' => 422,
-                   'title' => 'Validation Error',
-                   'detail' => 'Your request is malformed or missing fields.',
-                   'meta' => $e->errors(),
-               ],
-           ], 422);
+           throw new ValidationErrorException(json_encode($e->errors()));
        }
 
        try {

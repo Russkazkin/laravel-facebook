@@ -203,7 +203,7 @@ class FriendsTest extends TestCase
             'status' => 1,
         ]);
 
-        $this->get('/api/users/' . $user->id)
+        $this->get('/api/users/' . $anotherUser->id)
             ->assertStatus(200)
             ->assertJson([
                 'data' => [

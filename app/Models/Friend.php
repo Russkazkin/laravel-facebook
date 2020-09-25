@@ -17,4 +17,14 @@ class Friend extends Model
     protected $guarded = [];
 
     protected $dates = ['confirmed_at'];
+
+    public static function friendship($userId)
+    {
+        return (new static())->where(function ($query) use ($userId){
+             return $query->where([
+                'user_id' => auth()->user()->id,
+                'friend_id' => $userId,
+             ]);
+        })->first();
+    }
 }

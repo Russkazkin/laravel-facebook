@@ -35,7 +35,7 @@ class FriendRequestResponseController extends Controller
         ]);
 
         try {
-            $friendRequest = Friend::where(['user_id' => $data['user_id'], 'friend_id' => auth()->user()->id])->firstOrFail()->delete();
+            Friend::where(['user_id' => $data['user_id'], 'friend_id' => auth()->user()->id])->firstOrFail()->delete();
         } catch (ModelNotFoundException $e) {
             throw new FriendRequestNotFoundException();
         }

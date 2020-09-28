@@ -31,7 +31,7 @@ class FriendRequestResponseController extends Controller
     public function destroy()
     {
         $data = request()->validate([
-            'user_id' => '',
+            'user_id' => 'required',
         ]);
 
         try {

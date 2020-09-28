@@ -1,10 +1,10 @@
 const state = {
-    user: false,
+    authUser: false,
     userStatus: null,
 };
 const getters = {
-    user: state => {
-        return state.user;
+    authUser: state => {
+        return state.authUser;
     }
 };
 const actions = {
@@ -20,8 +20,8 @@ const actions = {
     }
 };
 const mutations = {
-    setAuthUser(state, user) {
-        state.user = user;
+    setAuthUser(state, authUser) {
+        state.authUser = authUser;
     }
 };
 

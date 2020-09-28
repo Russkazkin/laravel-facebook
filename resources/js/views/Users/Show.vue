@@ -17,6 +17,11 @@
                 {{ user.data.attributes.name }}
             </p>
         </div>
+        <div class="absolute flex items-center bottom-0 right-0 mb-4 mr-12 z-20">
+            <button class="py-1 px-3 bg-gray-400 rounded">
+                Add Friend
+            </button>
+        </div>
     </div>
     <p v-if="loading">Loading posts...</p>
     <Post v-for="post in posts" :key="post.data.post_id" :post="post" v-else />

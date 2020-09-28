@@ -3,19 +3,19 @@ const state = {
     userStatus: null,
 };
 const getters = {
-    authUser: state => {
+    user: state => {
         return state.user;
     }
 };
 const actions = {
     async fetchAuthUser({commit, state}){
+        commit("setUserStatus", "loading");
         try {
             const authUser = (await axios.get('/api/auth-user')).data;
             commit("setAuthUser", authUser);
+            commit("setUserStatus", "success");
         } catch (error) {
-            console.log('Unable to fetch auth user, ' + error.status);
-        } finally {
-
+            commit("setUserStatus", "error");
         }
     }
 };

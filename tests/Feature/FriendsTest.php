@@ -108,6 +108,8 @@ class FriendsTest extends TestCase
      /** @test  */
     public function friend_request_can_be_ignored()
     {
+        $this->withoutExceptionHandling();
+
         $this->actingAs($user = factory(User::class)->create(), 'api');
         $anotherUser = factory(User::class)->create();
 

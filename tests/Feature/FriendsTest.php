@@ -105,6 +105,31 @@ class FriendsTest extends TestCase
         ]);
     }
 
+     /** @test  */
+    public function friend_request_can_be_ignored()
+    {
+        $this->actingAs($user = factory(User::class)->create(), 'api');
+        $anotherUser = factory(User::class)->create();
+
+        $this->post('/api/friend-request', [
+            'friend_id' => $anotherUser->id,
+        ])->assertStatus(200);;
+
+        $response = $this->actingAs($anotherUser, 'api')
+            ->delete('/api/friend-request-response/delete', [
+                'user_id' => $user->id,
+            ]);
+
+        $response->assertStatus(204);
+
+        $friendRequest = Friend::first();
+
+        $this->assertNull($friendRequest);
+
+        $response->assertNoContent();
+    }
+
+
     /** @test  */
     public function only_valid_friend_requests_can_be_accepted()
     {

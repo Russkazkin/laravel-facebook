@@ -1,10 +1,14 @@
 const state = {
     user: false,
     userStatus: null,
+    friendButtonText: 'Add Friend',
 };
 const getters = {
     user: state => {
         return state.user;
+    },
+    friendButtonText: state => {
+        return state.friendButtonText;
     }
 };
 const actions = {
@@ -17,6 +21,9 @@ const actions = {
         } finally {
             this.loading = false;
         }
+    },
+    async sendFriendRequest({commit, state}, userId) {
+        commit("setButtonText", "Loading...");
     }
 };
 const mutations = {
@@ -25,7 +32,11 @@ const mutations = {
     },
     setUserStatus(state, status) {
         state.userStatus = status;
-    }
+    },
+    setButtonText(state, text) {
+        state.friendButtonText = text;
+    },
+
 
 };
 

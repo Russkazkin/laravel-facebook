@@ -22,8 +22,17 @@ const actions = {
             this.loading = false;
         }
     },
-    async sendFriendRequest({commit, state}, userId) {
+    async sendFriendRequest({commit, state}, friend_id) {
         commit("setButtonText", "Loading...");
+
+        try {
+            await axios.post('/api/friend-request', { 'friend_id': friend_id });
+            commit("setButtonText", "Pending Friend Request");
+        } catch (e) {
+            commit("setButtonText", "Add Friend");
+        } finally {
+
+        }
     }
 };
 const mutations = {

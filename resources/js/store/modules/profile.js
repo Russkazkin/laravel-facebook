@@ -1,27 +1,32 @@
 const state = {
     user: false,
     userStatus: null,
-    friendButtonText: 'Add Friend',
+    friendButtonText: null,
 };
 const getters = {
     user: state => {
         return state.user;
+    },
+    friendship: state => {
+        return state.user.data.attributes.friendship;
     },
     friendButtonText: state => {
         return state.friendButtonText;
     }
 };
 const actions = {
-    async fetchUser({commit, state}, userId){
+    async fetchUser({commit, dispatch}, userId){
         try {
             const user = (await axios.get('/api/users/' + userId)).data;
             commit("setUser", user);
+            dispatch("setFriendButton");
         } catch (error) {
-            console.log('Unable to fetch data, ' + error.status)
+            console.log('Unable to fetch data, ' + error.status);
         } finally {
             this.loading = false;
         }
     },
+
     async sendFriendRequest({commit, state}, friend_id) {
         commit("setButtonText", "Loading...");
 
@@ -33,7 +38,16 @@ const actions = {
         } finally {
 
         }
+    },
+
+    setFriendButton({commit, getters}){
+        if(getters.friendship === null){
+            commit("setButtonText", "Add Friend");
+        }else if(getters.friendship.data.attributes.confirmed_at === null) {
+            commit("setButtonText", "Pending Friend Request");
+        }
     }
+
 };
 const mutations = {
     setUser(state, user) {

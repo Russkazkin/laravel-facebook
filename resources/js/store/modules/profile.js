@@ -1,27 +1,37 @@
 const state = {
     user: false,
     userStatus: null,
-    friendButtonText: null,
 };
 const getters = {
     user: state => {
         return state.user;
     },
+    userStatus: state => {
+        return state.userStatus;
+    },
+
     friendship: state => {
         return state.user.data.attributes.friendship;
     },
-    friendButtonText: state => {
-        return state.friendButtonText;
+    friendButtonText: (state, getters, rootState) => {
+        if(getters.friendship === null){
+            return "Add Friend";
+        }else if(getters.friendship.data.attributes.confirmed_at === null) {
+            return  "Pending Friend Request";
+        }
     }
 };
 const actions = {
     async fetchUser({commit, dispatch}, userId){
+        commit("setUserStatus", "loading");
         try {
             const user = (await axios.get('/api/users/' + userId)).data;
             commit("setUser", user);
-            dispatch("setFriendButton");
+            commit("setUserStatus", "success");
+
         } catch (error) {
-            console.log('Unable to fetch data, ' + error.status);
+            console.log('Unable to fetch data, ' + error.response.status);
+            commit("setUserStatus", "error");
         } finally {
             this.loading = false;
         }
@@ -31,27 +41,21 @@ const actions = {
         commit("setButtonText", "Loading...");
 
         try {
-            await axios.post('/api/friend-request', { 'friend_id': friend_id });
-            commit("setButtonText", "Pending Friend Request");
+            const friendship = (await axios.post('/api/friend-request', { 'friend_id': friend_id })).data;
+            commit("setUserFriendship", friendship);
         } catch (e) {
-            commit("setButtonText", "Add Friend");
+            console.error(e.response.data.message);
         } finally {
 
         }
     },
-
-    setFriendButton({commit, getters}){
-        if(getters.friendship === null){
-            commit("setButtonText", "Add Friend");
-        }else if(getters.friendship.data.attributes.confirmed_at === null) {
-            commit("setButtonText", "Pending Friend Request");
-        }
-    }
-
 };
 const mutations = {
     setUser(state, user) {
         state.user = user;
+    },
+    setUserFriendship(state, friendship) {
+        state.user.data.attributes.friendship = friendship;
     },
     setUserStatus(state, status) {
         state.userStatus = status;

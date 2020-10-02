@@ -1,6 +1,7 @@
 <template>
 <div class="flex flex-col items-center">
-    <div class="relative mb-8">
+    <div v-if="userStatus === 'loading'">Loading...</div>
+    <div class="relative mb-8" v-else>
         <div class="w-100 h-64 overflow-hidden z-10">
             <img class="object-cover w-full" src="https://photographylife.com/wp-content/uploads/2017/01/What-is-landscape-photography.jpg" alt="user profile wallpaper">
         </div>
@@ -62,6 +63,7 @@ export default {
         ...mapGetters({
             user: 'user',
             friendButtonText: 'friendButtonText',
+            userStatus: 'userStatus',
         }),
     }
 }

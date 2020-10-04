@@ -38,8 +38,6 @@ const actions = {
     },
 
     async sendFriendRequest({commit, state}, friend_id) {
-        commit("setButtonText", "Loading...");
-
         try {
             const friendship = (await axios.post('/api/friend-request', { 'friend_id': friend_id })).data;
             commit("setUserFriendship", friendship);
@@ -49,6 +47,27 @@ const actions = {
 
         }
     },
+     async acceptFriendRequest({commit, state}, user_id) {
+        try {
+            const friendship = (await axios.post('/api/friend-request-response', { 'user_id': user_id })).data;
+            commit("setUserFriendship", friendship);
+        } catch (e) {
+            console.error(e.response.data.message);
+        } finally {
+
+        }
+    },
+    async ignoreFriendRequest({commit, state}, user_id) {
+        try {
+            const friendship = (await axios.delete('/api/friend-request-response/delete', { data: {'user_id': user_id }})).data;
+            commit("setUserFriendship", friendship);
+        } catch (e) {
+            console.error(e.response.data.message);
+        } finally {
+
+        }
+    },
+
 };
 const mutations = {
     setUser(state, user) {
@@ -60,11 +79,6 @@ const mutations = {
     setUserStatus(state, status) {
         state.userStatus = status;
     },
-    setButtonText(state, text) {
-        state.friendButtonText = text;
-    },
-
-
 };
 
 export default { state, getters, actions, mutations };

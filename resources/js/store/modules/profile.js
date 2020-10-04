@@ -21,6 +21,8 @@ const getters = {
             && getters.friendship.data.attributes.friend_id !== rootState.User.authUser.data.user_id
         ) {
             return  "Pending Friend Request";
+        } else if (getters.friendship.data.attributes.confirmed_at !== null){
+            return '';
         }
         return 'Accept';
     }
@@ -63,8 +65,8 @@ const actions = {
     },
     async ignoreFriendRequest({commit, state}, user_id) {
         try {
-            const friendship = (await axios.delete('/api/friend-request-response/delete', { data: {'user_id': user_id }})).data;
-            commit("setUserFriendship", friendship);
+            (await axios.delete('/api/friend-request-response/delete', { data: {'user_id': user_id }})).data;
+            commit("setUserFriendship", null);
         } catch (e) {
             console.error(e.response.data.errors.detail);
         } finally {

@@ -16,9 +16,13 @@ const getters = {
     friendButtonText: (state, getters, rootState) => {
         if(getters.friendship === null){
             return "Add Friend";
-        }else if(getters.friendship.data.attributes.confirmed_at === null) {
+        }else if(
+            getters.friendship.data.attributes.confirmed_at === null
+            && getters.friendship.data.attributes.friend_id !== rootState.user.user.data.user_id
+        ) {
             return  "Pending Friend Request";
         }
+        return 'Accept';
     }
 };
 const actions = {

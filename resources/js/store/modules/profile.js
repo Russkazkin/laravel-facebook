@@ -18,7 +18,7 @@ const getters = {
             return "Add Friend";
         }else if(
             getters.friendship.data.attributes.confirmed_at === null
-            && getters.friendship.data.attributes.friend_id !== rootState.user.user.data.user_id
+            && getters.friendship.data.attributes.friend_id !== rootState.User.authUser.data.user_id
         ) {
             return  "Pending Friend Request";
         }

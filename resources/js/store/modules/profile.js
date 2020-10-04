@@ -46,17 +46,17 @@ const actions = {
             const friendship = (await axios.post('/api/friend-request', { 'friend_id': friend_id })).data;
             commit("setUserFriendship", friendship);
         } catch (e) {
-            console.error(e.response.data.message);
+            console.error(e.response.data.errors.detail);
         } finally {
 
         }
     },
      async acceptFriendRequest({commit, state}, user_id) {
         try {
-            const friendship = (await axios.post('/api/friend-request-response', { 'user_id': user_id })).data;
+            const friendship = (await axios.post('/api/friend-request-response', { 'user_id': user_id, 'status': 1 })).data;
             commit("setUserFriendship", friendship);
         } catch (e) {
-            console.error(e.response.data.message);
+            console.error(e.response.data.errors.detail);
         } finally {
 
         }
@@ -66,7 +66,7 @@ const actions = {
             const friendship = (await axios.delete('/api/friend-request-response/delete', { data: {'user_id': user_id }})).data;
             commit("setUserFriendship", friendship);
         } catch (e) {
-            console.error(e.response.data.message);
+            console.error(e.response.data.errors.detail);
         } finally {
 
         }

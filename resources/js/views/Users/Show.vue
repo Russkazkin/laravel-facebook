@@ -20,19 +20,19 @@
         </div>
         <div class="absolute flex items-center bottom-0 right-0 mb-4 mr-12 z-20">
             <button class="py-1 px-3 bg-gray-400 rounded"
-                    v-if="friendButtonText && friendButtonText === 'Accept'"
+                    v-if="friendButtonText && friendButtonText !== 'Accept'"
                     @click="$store.dispatch('sendFriendRequest', $route.params.userId)"
                     :disabled="friendButtonText === 'Loading...'">
                 {{ friendButtonText }}
             </button>
              <button class="mr-2 py-1 px-3 bg-blue-500 rounded"
-                    v-if="friendButtonText && friendButtonText !== 'Accept'"
+                    v-if="friendButtonText && friendButtonText === 'Accept'"
                     @click="$store.dispatch('acceptFriendRequest', $route.params.userId)"
                     :disabled="friendButtonText === 'Loading...'">
                 Accept
             </button>
             <button class="py-1 px-3 bg-gray-400 rounded"
-                    v-if="friendButtonText && friendButtonText !== 'Accept'"
+                    v-if="friendButtonText && friendButtonText === 'Accept'"
                     @click="$store.dispatch('ignoreFriendRequest', $route.params.userId)"
                     :disabled="friendButtonText === 'Loading...'">
                 Ignore

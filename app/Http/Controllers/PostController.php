@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\PostResource;
 use App\Http\Resources\PostResourceCollection;
+use App\Models\Friend;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,16 @@ class PostController extends Controller
      */
     public function index()
     {
-        return new PostResourceCollection(request()->user()->posts);
+        $friends = Friend::friendships();
+
+        if($friends->isEmpty()) {
+            return new PostResourceCollection(request()->user()->posts);
+        }
+
+        return new PostResourceCollection(
+            Post::whereIn('user_id', [$friends->pluck('user_id'), $friends->pluck('friend_id')])
+            ->get()
+        );
     }
 
     /**

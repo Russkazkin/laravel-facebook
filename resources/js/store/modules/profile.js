@@ -1,13 +1,21 @@
 const state = {
     user: false,
     userStatus: null,
+    posts: [],
+    postsStatus: null,
 };
 const getters = {
     user: state => {
         return state.user;
     },
+    posts: state => {
+        return state.posts
+    },
     userStatus: state => {
         return state.userStatus;
+    },
+    postsStatus: state => {
+        return state.postsStatus;
     },
     friendship: state => {
         return state.user.data.attributes.friendship;
@@ -41,7 +49,17 @@ const actions = {
             this.loading = false;
         }
     },
-
+    async fetchUserPosts({commit, dispatch}, userId) {
+        commit("setPostsStatus", "loading");
+        try {
+            const posts = (await axios.get('/api/users/' + userId + '/posts')).data.data;
+            commit("setPosts", posts);
+            commit("setPostsStatus", "success");
+        } catch (error) {
+            console.log('Unable to fetch data, ' + error.response.status);
+            commit("setPostsStatus", "error");
+        }
+    },
     async sendFriendRequest({commit, state}, friend_id) {
         try {
             const friendship = (await axios.post('/api/friend-request', { 'friend_id': friend_id })).data;
@@ -78,12 +96,18 @@ const mutations = {
     setUser(state, user) {
         state.user = user;
     },
+    setPosts(state, posts) {
+        state.posts = posts;
+    },
     setUserFriendship(state, friendship) {
         state.user.data.attributes.friendship = friendship;
     },
     setUserStatus(state, status) {
         state.userStatus = status;
     },
+    setPostsStatus(state, status) {
+        state.postsStatus = status;
+    }
 };
 
 export default { state, getters, actions, mutations };

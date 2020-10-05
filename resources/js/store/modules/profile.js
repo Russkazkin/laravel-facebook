@@ -60,14 +60,15 @@ const actions = {
             commit("setPostsStatus", "error");
         }
     },
-    async sendFriendRequest({commit, state}, friend_id) {
+    async sendFriendRequest({commit, getters}, friend_id) {
+        if(getters.friendButtonText !== 'Add Friend') {
+            return;
+        }
         try {
             const friendship = (await axios.post('/api/friend-request', { 'friend_id': friend_id })).data;
             commit("setUserFriendship", friendship);
         } catch (e) {
             console.error(e.response.data.errors.detail);
-        } finally {
-
         }
     },
      async acceptFriendRequest({commit, state}, user_id) {

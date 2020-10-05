@@ -9,7 +9,6 @@ const getters = {
     userStatus: state => {
         return state.userStatus;
     },
-
     friendship: state => {
         return state.user.data.attributes.friendship;
     },

@@ -23,13 +23,7 @@ export default {
         }
     },
     async mounted() {
-        try {
-            this.posts = (await axios.get('/api/posts')).data.data;
-        } catch (error) {
-            console.log('Unable to fetch posts, ' + error.status)
-        } finally {
-            this.loading = false;
-        }
+
     },
 }
 </script>

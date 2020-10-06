@@ -1,6 +1,6 @@
 const state = {
     newsPosts: null,
-    newsPostsStatus: null,
+    newsStatus: null,
 };
 const getters = {
     newsPosts: state => {
@@ -8,7 +8,7 @@ const getters = {
     },
     newsStatus: state => {
         return {
-            newsPostsStatus: state.newsPostsStatus,
+            postsStatus: state.newsPostsStatus,
         }
     },
 };
@@ -30,7 +30,7 @@ const mutations = {
         state.newsPosts = posts;
     },
     setPostsStatus(state, status) {
-        state.newsPostsStatus = status;
+        state.newsStatus = status;
     },
 
 };

@@ -6,8 +6,9 @@
                 <img class="w-8 h-8 object-cover rounded-full" src="https://thispersondoesnotexist.com/image" alt="profile image">
             </div>
         </div>
-        <div class="flex-1 mx-4">
+        <div class="flex-1 mx-4 flex">
             <input type="text" name="body" class="pl-4 h-8 bg-gray-200 w-full rounded-full focus:outline-none focus:shadow-outline text-sm" placeholder="Add a post">
+            <button class="bg-gray-200 ml-2 px-3 py-1 rounded-full">Post</button>
         </div>
         <div>
             <button class="flex justify-center items-center bg-gray-200 rounded-full w-10 h-10">

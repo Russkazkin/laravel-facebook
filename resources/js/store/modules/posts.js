@@ -1,6 +1,7 @@
 const state = {
     newsPosts: null,
-    newsStatus: null,
+    newsPostsStatus: null,
+    postMessage: '',
 };
 const getters = {
     newsPosts: state => {
@@ -10,6 +11,9 @@ const getters = {
         return {
             postsStatus: state.newsPostsStatus,
         }
+    },
+    postMessage: state => {
+        return state.postMessage;
     },
 };
 const actions = {
@@ -31,6 +35,9 @@ const mutations = {
     },
     setPostsStatus(state, status) {
         state.newsStatus = status;
+    },
+    updateMessage(state, message) {
+        state.postMessage = message;
     },
 
 };

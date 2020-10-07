@@ -21,7 +21,17 @@
 
 <script>
 export default {
-    name: "NewPost"
+    name: "NewPost",
+    computed: {
+        postMessage: {
+            get() {
+                return this.$store.getters.postMessage;
+            },
+            set() {
+                this.$store.commit("updateMessage", postMessage);
+            },
+        }
+    },
 }
 </script>
 

@@ -11,7 +11,13 @@
                    name="body"
                    class="pl-4 h-8 bg-gray-200 w-full rounded-full focus:outline-none focus:shadow-outline text-sm"
                    placeholder="Add a post">
-            <button @click="$store.dispatch('postMessage')" class="bg-gray-200 ml-2 px-3 py-1 rounded-full">Post</button>
+            <transition name="fade">
+                <button @click="$store.dispatch('postMessage')"
+                        v-if="postMessage"
+                        class="bg-gray-200 ml-2 px-3 py-1 rounded-full">
+                    Post
+                </button>
+            </transition>
         </div>
         <div>
             <button class="flex justify-center items-center bg-gray-200 rounded-full w-10 h-10">
@@ -38,6 +44,9 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="sass">
+.fade-enter-active, .fade-leave-active
+    transition: opacity 500ms
+.fade-enter,  .fade-leave-to
+    opacity: 0
 </style>

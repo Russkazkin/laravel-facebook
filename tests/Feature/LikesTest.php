@@ -23,7 +23,7 @@ test('a_user_can_like_a_post', function () {
                     'attributes' => [],
                 ],
                 'links' => [
-                    'self' => url('/posts'),
+                    'self' => url('/posts/123'),
                 ]
             ]
         ],

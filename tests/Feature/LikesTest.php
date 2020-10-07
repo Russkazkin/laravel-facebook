@@ -10,6 +10,7 @@ test('a_user_can_like_a_post', function () {
     $this->actingAs($user = factory(User::class)->create());
     $anotherUser = factory(User::class)->create();
     $post = factory(Post::class)->create(['id' => 123, 'user_id' => $anotherUser->id]);
+
     $response = $this->post('/api/post/' . $post->id . '/like/');
     $response->assertOk();
     $this->assertCount(1, $user->likedPosts);

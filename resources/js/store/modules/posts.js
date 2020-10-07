@@ -27,7 +27,18 @@ const actions = {
             console.log('Unable to fetch posts, ' + error.response.status);
             commit("setPostsStatus", "error");
         }
-    }
+    },
+    async postMessage({commit, state}){
+        commit("setPostsStatus", "loading");
+        try {
+            const post = (await axios.post('/api/posts', { body: state.postMessage })).data;
+            commit("pushPost", post);
+            commit("updateMessage", "");
+        } catch (error) {
+            console.log('Unable to fetch posts, ' + error.response.status);
+        }
+    },
+
 };
 const mutations = {
     setPosts(state, posts) {
@@ -39,6 +50,9 @@ const mutations = {
     updateMessage(state, message) {
         state.postMessage = message;
     },
+    pushPost(state, post) {
+        state.newsPosts.unshift(post);
+    }
 
 };
 

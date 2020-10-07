@@ -7,8 +7,11 @@
             </div>
         </div>
         <div class="flex-1 mx-4 flex">
-            <input type="text" name="body" class="pl-4 h-8 bg-gray-200 w-full rounded-full focus:outline-none focus:shadow-outline text-sm" placeholder="Add a post">
-            <button class="bg-gray-200 ml-2 px-3 py-1 rounded-full">Post</button>
+            <input type="text" v-model="postMessage"
+                   name="body"
+                   class="pl-4 h-8 bg-gray-200 w-full rounded-full focus:outline-none focus:shadow-outline text-sm"
+                   placeholder="Add a post">
+            <button @click="$store.dispatch('postMessage')" class="bg-gray-200 ml-2 px-3 py-1 rounded-full">Post</button>
         </div>
         <div>
             <button class="flex justify-center items-center bg-gray-200 rounded-full w-10 h-10">
@@ -27,7 +30,7 @@ export default {
             get() {
                 return this.$store.getters.postMessage;
             },
-            set() {
+            set(postMessage) {
                 this.$store.commit("updateMessage", postMessage);
             },
         }

@@ -40,7 +40,6 @@
     <div v-if="postsStatus === 'loading'">Loading posts...</div>
     <p v-else-if="posts.length < 1">No posts found</p>
     <Post v-for="post in posts" :key="post.data.post_id" :post="post" v-else />
-
 </div>
 </template>
 

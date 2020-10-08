@@ -36,8 +36,7 @@ test('posts_are_returned_with_likes', function () {
     /* @var \Tests\TestCase $this */
 
     $this->actingAs($user = factory(User::class)->create(), 'api');
-    $anotherUser = factory(User::class)->create();
-    $post = factory(Post::class)->create(['id' => 123, 'user_id' => $anotherUser->id]);
+    $post = factory(Post::class)->create(['id' => 123, 'user_id' => $user->id]);
     $this->post('/api/posts/' . $post->id . '/like/');
 
     $response = $this->get('/api/posts');
@@ -49,16 +48,18 @@ test('posts_are_returned_with_likes', function () {
                     'type' => 'posts',
                     'attributes' => [
                         'likes' => [
-                            [
-                                'data' => [
-                                    'type' => 'likes',
-                                    'like_id' => 1,
-                                    'attributes' => [],
+                            'data' => [
+                                [
+                                    'data' => [
+                                        'type' => 'likes',
+                                        'like_id' => 1,
+                                        'attributes' => [],
+                                    ]
                                 ]
-                            ]
+                            ],
+                            'like_count' => 1,
+                            'user_likes_post' => true,
                         ],
-                        'like_count' => 1,
-                        'user_likes_post' => true,
                     ],
                 ]
             ],

@@ -6,7 +6,6 @@ use App\Models\User;
 test('a_user_can_like_a_post', function () {
     /* @var \Tests\TestCase $this */
 
-    $this->withoutExceptionHandling();
     $this->actingAs($user = factory(User::class)->create(), 'api');
     $anotherUser = factory(User::class)->create();
     $post = factory(Post::class)->create(['id' => 123, 'user_id' => $anotherUser->id]);
@@ -30,5 +29,39 @@ test('a_user_can_like_a_post', function () {
         'links' => [
             'self' => url('/posts'),
         ]
+    ]);
+});
+
+test('posts_are_returned_with_likes', function () {
+    /* @var \Tests\TestCase $this */
+
+    $this->actingAs($user = factory(User::class)->create(), 'api');
+    $anotherUser = factory(User::class)->create();
+    $post = factory(Post::class)->create(['id' => 123, 'user_id' => $anotherUser->id]);
+    $this->post('/api/posts/' . $post->id . '/like/');
+
+    $response = $this->get('/api/posts');
+    $response->assertOk();
+    $response->assertJson([
+        'data' => [
+            [
+                'data' => [
+                    'type' => 'posts',
+                    'attributes' => [
+                        'likes' => [
+                            [
+                                'data' => [
+                                    'type' => 'likes',
+                                    'like_id' => 1,
+                                    'attributes' => [],
+                                ]
+                            ]
+                        ],
+                        'like_count' => 1,
+                        'user_likes_post' => true,
+                    ],
+                ]
+            ],
+        ],
     ]);
 });

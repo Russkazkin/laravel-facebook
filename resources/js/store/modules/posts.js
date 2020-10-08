@@ -38,6 +38,14 @@ const actions = {
             console.log('Unable to fetch posts, ' + error.response.status);
         }
     },
+    async likePost({commit, state}, {postId, postKey}) {
+        try {
+            const likes = (await axios.post('/api/posts/' + postId + '/like')).data;
+            commit("pushLikes", {likes: likes, postKey: postKey});
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
 };
 const mutations = {
@@ -52,6 +60,9 @@ const mutations = {
     },
     pushPost(state, post) {
         state.newsPosts.unshift(post);
+    },
+    pushLikes(state, {likes, postKey}) {
+        state.newsPosts[postKey].data.attributes.likes = likes;
     }
 
 };

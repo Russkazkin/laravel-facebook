@@ -25,6 +25,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereImage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUserId($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $likes
+ * @property-read int|null $likes_count
  */
 class Post extends Model
 {

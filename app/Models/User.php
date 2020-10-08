@@ -40,6 +40,8 @@ use Laravel\Passport\HasApiTokens;
  * @property-read int|null $posts_count
  * @property-read \Illuminate\Database\Eloquent\Collection|User[] $friends
  * @property-read int|null $friends_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Post[] $likedPosts
+ * @property-read int|null $liked_posts_count
  */
 class User extends Authenticatable
 {

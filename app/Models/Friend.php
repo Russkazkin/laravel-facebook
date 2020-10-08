@@ -11,6 +11,20 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Friend newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Friend query()
  * @mixin \Eloquent
+ * @property int $id
+ * @property int $user_id
+ * @property int $friend_id
+ * @property int|null $status
+ * @property \Illuminate\Support\Carbon|null $confirmed_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Friend whereConfirmedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Friend whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Friend whereFriendId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Friend whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Friend whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Friend whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Friend whereUserId($value)
  */
 class Friend extends Model
 {

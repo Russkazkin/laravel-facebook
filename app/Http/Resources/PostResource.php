@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Post;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class PostResource extends JsonResource
@@ -14,12 +15,15 @@ class PostResource extends JsonResource
      */
     public function toArray($request)
     {
+        /** @var Post $this */
+
         return [
             'data' => [
                 'type' => 'posts',
                 'post_id' => $this->id,
                 'attributes' => [
                     'posted_by' => new UserResource($this->user),
+                    'likes' => new LikeResourceCollection($this->likes),
                     'body' => $this->body,
                     'image' => $this->image,
                     'posted_at' => $this->created_at->diffForHumans(),

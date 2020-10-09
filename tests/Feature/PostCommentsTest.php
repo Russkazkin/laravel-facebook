@@ -6,6 +6,7 @@ use App\Models\User;
 test('a_user_can_comment_on_a_post', function () {
     /* @var \Tests\TestCase $this */
 
+    $this->withoutExceptionHandling();
     $this->actingAs($user = factory(User::class)->create(), 'api');
     $post = factory(Post::class)->create(['id' => 123, 'user_id' => $user->id]);
 

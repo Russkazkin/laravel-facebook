@@ -13,6 +13,6 @@ class PostCommentController extends Controller
             'body' => '',
         ]);
 
-        $post->comments()->create($data);
+        $post->comments()->create(array_merge($data, ['user_id' => auth()->user()->id]));
     }
 }

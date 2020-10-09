@@ -30,9 +30,9 @@ test('a_user_can_comment_on_a_post', function () {
                     'attributes' => [
                         'commented_by' => [
                             'data' => [
+                                'user_id' => $user->id,
                                 'attributes' => [
                                     'name' => $user->name,
-                                    'user_id' => $user->id,
                                 ]
                             ]
                         ],

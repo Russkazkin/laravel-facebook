@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Post;
+use App\Models\User;
+
 test('a_user_can_comment_on_a_post', function () {
     /* @var \Tests\TestCase $this */
 

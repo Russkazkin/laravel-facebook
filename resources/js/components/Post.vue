@@ -65,9 +65,9 @@
             </div>
             <div class="ml-4 flex-1">
                 <div class="p-2 bg-gray-200 rounded-lg text-sm">
-                    <a :href="'/users/' + comment.data.attributes.commented_by.data.user_id" class="font-bold text-blue-700">
+                    <router-link :to="'/users/' + comment.data.attributes.commented_by.data.user_id" class="font-bold text-blue-700">
                         {{ comment.data.attributes.commented_by.data.attributes.name }}
-                    </a>
+                    </router-link>
                     <p class="inline">
                         {{ comment.data.attributes.body }}
                     </p>

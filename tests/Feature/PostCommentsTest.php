@@ -49,7 +49,7 @@ test('a_user_can_comment_on_a_post', function () {
         ]
     ]);
 });
-test('a_body_id_required_to_live_a_comment_on_a_post', function () {
+test('a_body_is_required_to_live_a_comment_on_a_post', function () {
     /* @var \Tests\TestCase $this */
 
     $this->actingAs($user = factory(User::class)->create(), 'api');

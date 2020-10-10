@@ -7,7 +7,6 @@ use App\Models\User;
 test('a_user_can_comment_on_a_post', function () {
     /* @var \Tests\TestCase $this */
 
-    $this->withoutExceptionHandling();
     $this->actingAs($user = factory(User::class)->create(), 'api');
     $post = factory(Post::class)->create(['id' => 123, 'user_id' => $user->id]);
 
@@ -49,4 +48,17 @@ test('a_user_can_comment_on_a_post', function () {
             'self' => url('/posts'),
         ]
     ]);
+});
+test('a_body_id_required_to_live_a_comment_on_a_post', function () {
+    /* @var \Tests\TestCase $this */
+
+    $this->actingAs($user = factory(User::class)->create(), 'api');
+    $post = factory(Post::class)->create(['id' => 123, 'user_id' => $user->id]);
+
+    $response = $this->post('/api/posts/' . $post->id . '/comment', [
+        'body' => ''
+    ]);
+    $response->assertStatus(422);
+    $responseString = json_decode($response->getContent(), true);
+    $this->assertArrayHasKey('body', $responseString['errors']['meta']);
 });

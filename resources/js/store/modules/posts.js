@@ -45,6 +45,14 @@ const actions = {
         } catch (error) {
             console.error(error);
         }
+    },
+    async commentPost({commit, state}, {body, postId, postKey}) {
+        try {
+            const comments = (await axios.post('/api/posts/' + postId + '/comment', {body})).data;
+            commit("pushComments", {comments, postKey});
+        } catch (error) {
+            console.error(error);
+        }
     }
 
 };
@@ -63,6 +71,9 @@ const mutations = {
     },
     pushLikes(state, {likes, postKey}) {
         state.newsPosts[postKey].data.attributes.likes = likes;
+    },
+    pushComments(state, {comments, postKey}) {
+        state.newsPosts[postKey].data.attributes.comments = comments;
     }
 
 };

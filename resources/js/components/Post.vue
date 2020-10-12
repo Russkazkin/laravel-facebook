@@ -54,7 +54,8 @@
             <input type="text"
                    v-model="commentBody"
                    name="comment"
-                   class="w-full pl-4 h-8 bg-gray-200 rounded-lg focus:outline-none">
+                   class="w-full pl-4 h-8 bg-gray-200 rounded-lg focus:outline-none"
+                   placeholder="Write your comment">
             <button v-if="commentBody" class="bg-gray-200 ml-2 px-2 py-1 rounded-lg focus:outline-none"
                     @click="$store.dispatch('commentPost', { body: commentBody, postId: post.data.post_id, postKey: $vnode.key }); commentBody = ''">
                 Post

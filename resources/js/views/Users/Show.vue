@@ -37,7 +37,7 @@
 
         </div>
     </div>
-    <div v-if="postsStatus === 'loading'">Loading posts...</div>
+    <div v-if="posts === null || postsStatus === 'loading'">Loading posts...</div>
     <p v-else-if="posts.length < 1">No posts found</p>
     <Post v-for="(post, index) in posts" :key="index" :post="post" v-else />
 </div>

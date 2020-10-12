@@ -1,15 +1,18 @@
 const state = {
-    newsPosts: null,
-    newsPostsStatus: null,
+    posts: null,
+    postsStatus: null,
     postMessage: '',
 };
 const getters = {
-    newsPosts: state => {
-        return state.newsPosts
+    posts: state => {
+        return state.posts
+    },
+    postsStatus: state => {
+        return state.postsStatus
     },
     newsStatus: state => {
         return {
-            postsStatus: state.newsPostsStatus,
+            postsStatus: state.postsStatus,
         }
     },
     postMessage: state => {
@@ -25,6 +28,17 @@ const actions = {
             commit("setPostsStatus", "success");
         } catch (error) {
             console.log('Unable to fetch posts, ' + error.response.status);
+            commit("setPostsStatus", "error");
+        }
+    },
+    async fetchUserPosts({commit, dispatch}, userId) {
+        commit("setPostsStatus", "loading");
+        try {
+            const posts = (await axios.get('/api/users/' + userId + '/posts')).data.data;
+            commit("setPosts", posts);
+            commit("setPostsStatus", "success");
+        } catch (error) {
+            console.log('Unable to fetch data, ' + error.response.status);
             commit("setPostsStatus", "error");
         }
     },
@@ -58,7 +72,7 @@ const actions = {
 };
 const mutations = {
     setPosts(state, posts) {
-        state.newsPosts = posts;
+        state.posts = posts;
     },
     setPostsStatus(state, status) {
         state.newsStatus = status;
@@ -67,13 +81,13 @@ const mutations = {
         state.postMessage = message;
     },
     pushPost(state, post) {
-        state.newsPosts.unshift(post);
+        state.posts.unshift(post);
     },
     pushLikes(state, {likes, postKey}) {
-        state.newsPosts[postKey].data.attributes.likes = likes;
+        state.posts[postKey].data.attributes.likes = likes;
     },
     pushComments(state, {comments, postKey}) {
-        state.newsPosts[postKey].data.attributes.comments = comments;
+        state.posts[postKey].data.attributes.comments = comments;
     }
 
 };

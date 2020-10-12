@@ -1,7 +1,7 @@
 <template>
 <div class="flex flex-col items-center py-4">
     <NewPost/>
-    <p v-if="newsStatus.postsStatus === 'loading'">Loading posts...</p>
+    <p v-if="postsStatus === 'loading'">Loading posts...</p>
     <Post v-for="(post, index) in posts" :key="index" :post="post" v-else />
 </div>
 </template>
@@ -19,8 +19,8 @@ export default {
     },
     computed: {
         ...mapGetters({
-            posts: "newsPosts",
-            newsStatus: "newsStatus",
+            posts: "posts",
+            postsStatus: "postsStatus",
         }),
     },
     async mounted() {

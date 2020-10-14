@@ -10,6 +10,8 @@ beforeEach(function () {
 test('images_can_be_uploaded', function () {
     /* @var \Tests\TestCase $this */
 
+    $this->withoutExceptionHandling();
+
     $this->actingAs($user = factory(User::class)->create(), 'api');
     $file = UploadedFile::fake()->image('user-image.jpg');
     $response = $this->post('/api/user-images', [

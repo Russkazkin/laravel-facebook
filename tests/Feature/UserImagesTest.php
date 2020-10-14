@@ -30,4 +30,19 @@ test('images_can_be_uploaded', function () {
     $this->assertEquals('300', $userImage->height);
     $this->assertEquals('cover', $userImage->location);
     $this->assertEquals($user->id, $userImage->user_id);
+    $response->assertJson([
+        'data' => [
+            'type' => 'user-images',
+            'user_image_id' => $userImage->id,
+            'attributes' => [
+                'path' => url($userImage->path),
+                'width' => $userImage->width,
+                'height' => $userImage->height,
+                'location' => $userImage->location,
+            ]
+        ],
+        'links' => [
+            'self' => url('/users/' . $user->id),
+        ]
+    ]);
 });

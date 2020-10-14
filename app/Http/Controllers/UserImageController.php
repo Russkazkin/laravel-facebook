@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserImageResource;
 use Illuminate\Http\Request;
 
 class UserImageController extends Controller
@@ -24,6 +25,6 @@ class UserImageController extends Controller
             'location' => $data['location'],
         ]);
 
-        return response([], 201);
+        return new UserImageResource($userImage);
     }
 }

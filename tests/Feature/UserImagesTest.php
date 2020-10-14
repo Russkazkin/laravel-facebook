@@ -29,4 +29,5 @@ test('images_can_be_uploaded', function () {
     $this->assertEquals('850', $userImage->width);
     $this->assertEquals('300', $userImage->height);
     $this->assertEquals('cover', $userImage->location);
+    $this->assertEquals($user->id, $userImage->user_id);
 });

@@ -46,3 +46,36 @@ test('images_can_be_uploaded', function () {
         ]
     ]);
 });
+
+test('users_are_returned_with_their_images', function () {
+    /* @var \Tests\TestCase $this */
+
+    $this->withoutExceptionHandling();
+
+    $this->actingAs($user = factory(User::class)->create(), 'api');
+    $file = UploadedFile::fake()->image('user-image.jpg');
+    $this->post('/api/user-images', [
+        'image' => $file,
+        'width' => 850,
+        'height' => 300,
+        'location'=> 'cover',
+    ])->assertStatus(201);
+    $response = $this->get('/api/users/' . $user->id);
+    $userImage = UserImage::first();
+
+    $response->assertJson([
+        'data' => [
+            'type' => 'users',
+            'user_id' => $user->id,
+            'attributes' => [
+                'cover_image' => [
+                    'data' => [
+                        'type' => 'user-images',
+                        'user_image_id' => $userImage->id,
+                        'attributes' => [],
+                    ],
+                ],
+            ],
+        ],
+    ]);
+});

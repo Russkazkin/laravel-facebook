@@ -60,8 +60,13 @@ test('users_are_returned_with_their_images', function () {
         'height' => 300,
         'location'=> 'cover',
     ])->assertStatus(201);
+    $this->post('/api/user-images', [
+        'image' => $file,
+        'width' => 850,
+        'height' => 300,
+        'location'=> 'profile',
+    ])->assertStatus(201);
     $response = $this->get('/api/users/' . $user->id);
-    $userImage = UserImage::first();
 
     $response->assertJson([
         'data' => [
@@ -71,7 +76,14 @@ test('users_are_returned_with_their_images', function () {
                 'cover_image' => [
                     'data' => [
                         'type' => 'user-images',
-                        'user_image_id' => $userImage->id,
+                        'user_image_id' => 1,
+                        'attributes' => [],
+                    ],
+                ],
+                'profile_image' => [
+                    'data' => [
+                        'type' => 'user-images',
+                        'user_image_id' => 2,
                         'attributes' => [],
                     ],
                 ],

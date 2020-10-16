@@ -98,4 +98,8 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserImage::class)->orderByDesc('id')->where('location', 'cover');
     }
+    public function profileImage()
+    {
+        return $this->hasOne(UserImage::class)->orderByDesc('id')->where('location', 'profile');
+    }
 }

@@ -93,4 +93,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserImage::class);
     }
+
+    public function coverImage()
+    {
+        return $this->hasOne(UserImage::class)->orderByDesc('id')->where('location', 'cover');
+    }
 }

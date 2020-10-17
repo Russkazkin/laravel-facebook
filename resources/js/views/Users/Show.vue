@@ -1,9 +1,7 @@
 <template>
 <div class="flex flex-col items-center">
     <div class="relative mb-8" v-if="userStatus === 'success' && user">
-        <div class="w-100 h-64 overflow-hidden z-10">
-            <img class="object-cover w-full" src="https://photographylife.com/wp-content/uploads/2017/01/What-is-landscape-photography.jpg" alt="user profile wallpaper">
-        </div>
+        <UploadableImage class="w-100 h-64 overflow-hidden z-10" />
         <div class="absolute flex items-center bottom-0 left-0 -mb-8 ml-12 z-20">
             <div class="w-32">
                 <img src="https://thispersondoesnotexist.com/image"
@@ -46,10 +44,12 @@
 <script>
 import Post from "../../components/Post";
 import {mapGetters} from "vuex";
+import UploadableImage from "../../components/UploadableImage";
 
 export default {
     name: "Show",
     components: {
+        UploadableImage,
         Post
     },
     async mounted() {

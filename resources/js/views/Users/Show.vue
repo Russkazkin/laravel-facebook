@@ -1,7 +1,7 @@
 <template>
 <div class="flex flex-col items-center">
     <div class="relative mb-8" v-if="userStatus === 'success' && user">
-        <UploadableImage class="w-100 h-64 overflow-hidden z-10" />
+        <UploadableImage class="w-100 h-64 overflow-hidden z-10" image-width="1500" image-height="300" location="cover" />
         <div class="absolute flex items-center bottom-0 left-0 -mb-8 ml-12 z-20">
             <div class="w-32">
                 <img src="https://thispersondoesnotexist.com/image"

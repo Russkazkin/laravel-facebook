@@ -1,7 +1,7 @@
 <template>
     <div>
         <img class="object-cover w-full"
-             src="https://photographylife.com/wp-content/uploads/2017/01/What-is-landscape-photography.jpg"
+             :src="userImage.data.attributes.path"
              alt="user profile wallpaper" ref="userImage">
 
     </div>
@@ -13,6 +13,7 @@ import Dropzone from 'dropzone';
 export default {
     name: "UploadableImage",
     props: [
+        'userImage',
         'imageWidth',
         'imageHeight',
         'location',

@@ -4,7 +4,10 @@
         <UploadableImage class="w-100 h-64 overflow-hidden z-10"
                          image-width="1500"
                          image-height="300"
-                         location="cover" :user-image="user.data.attributes.cover_image" />
+                         location="cover"
+                         classes="object-cover w-full"
+                         alt="user profile wallpaper"
+                         :user-image="user.data.attributes.cover_image" />
         <div class="absolute flex items-center bottom-0 left-0 -mb-8 ml-12 z-20">
             <div class="w-32">
                 <img src="https://thispersondoesnotexist.com/image"

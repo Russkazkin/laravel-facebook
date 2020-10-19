@@ -1,8 +1,9 @@
 <template>
     <div>
-        <img class="object-cover w-full"
-             :src="userImage.data.attributes.path"
-             alt="user profile wallpaper" ref="userImage">
+        <img :class="classes"
+             :src="imageObject.data.attributes.path"
+             :alt="alt"
+             ref="userImage">
 
     </div>
 </template>
@@ -17,10 +18,13 @@ export default {
         'imageWidth',
         'imageHeight',
         'location',
+        'classes',
+        'alt'
     ],
     data: () => {
         return {
             dropzone: null,
+            uploadedImage: null,
         }
     },
     mounted() {
@@ -41,9 +45,13 @@ export default {
                     'X-CSRF-TOKEN': document.head.querySelector('meta[name=csrf-token]').content,
                 },
                 success: (e, res) => {
+                    this.uploadedImage = res;
                     alert('uploaded!');
                 }
             }
+        },
+        imageObject() {
+            return this.uploadedImage || this.userImage;
         }
     }
 }

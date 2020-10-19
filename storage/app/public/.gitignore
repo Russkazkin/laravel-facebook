@@ -1,4 +1,4 @@
 *
 !.gitignore
-!cover-default-image.png
-!profile-default-image.jpeg
+!user-images/cover-default-image.png
+!user-images/profile-default-image.jpeg

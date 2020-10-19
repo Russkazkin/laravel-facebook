@@ -10,9 +10,12 @@
                          :user-image="user.data.attributes.cover_image" />
         <div class="absolute flex items-center bottom-0 left-0 -mb-8 ml-12 z-20">
             <div class="w-32">
-                <img src="https://thispersondoesnotexist.com/image"
-                     alt="user profile img"
-                     class="object-cover w-32 h-32 border-4 border-gray-200 rounded-full shadow-lg">
+                <UploadableImage image-width="1500"
+                                 image-height="300"
+                                 location="profile"
+                                 classes="object-cover w-32 h-32 border-4 border-gray-200 rounded-full shadow-lg"
+                                 alt="user profile img"
+                                 :user-image="user.data.attributes.profile_image" />
             </div>
             <p class="ml-4 text-gray-100 text-2xl text-shadow">
                 {{ user.data.attributes.name }}

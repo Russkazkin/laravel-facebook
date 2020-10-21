@@ -10,6 +10,7 @@
 
 <script>
 import Dropzone from 'dropzone';
+import {mapGetters} from "vuex";
 
 export default {
     name: "UploadableImage",
@@ -28,9 +29,14 @@ export default {
         }
     },
     mounted() {
-        this.dropzone = new Dropzone(this.$refs.userImage, this.settings);
+        if (this.authUser.data.user_id.toString() === this.$route.params.userId) {
+            this.dropzone = new Dropzone(this.$refs.userImage, this.settings);
+        }
     },
     computed: {
+        ...mapGetters({
+            authUser: "authUser",
+        }),
         settings() {
             return {
                 paramName: 'image',

@@ -3,7 +3,7 @@
     <div class="flex flex-col p-4">
         <div class="flex items-center">
             <div class="w-8">
-                <img class="w-8 h-8 object-cover rounded-full" src="https://thispersondoesnotexist.com/image" alt="profile image">
+                <img class="w-8 h-8 object-cover rounded-full" :src="post.data.attributes.posted_by.data.attributes.profile_image.data.attributes.path" alt="profile image">
             </div>
             <div class="text-sm ml-6">
                 <div class="font-bold">
@@ -63,7 +63,7 @@
         </div>
         <div class="flex my-4 items-center" v-for="comment in post.data.attributes.comments.data">
             <div>
-                <img class="w-8 h-8 object-cover rounded-full" src="https://thispersondoesnotexist.com/image" alt="profile image">
+                <img class="w-8 h-8 object-cover rounded-full" :src="comment.data.attributes.commented_by.data.attributes.profile_image.data.attributes.path" alt="profile image">
             </div>
             <div class="ml-4 flex-1">
                 <div class="p-2 bg-gray-200 rounded-lg text-sm">

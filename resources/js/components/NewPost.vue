@@ -3,7 +3,7 @@
     <div class="flex justify-between items-center">
         <div>
             <div>
-                <img class="w-8 h-8 object-cover rounded-full" src="https://thispersondoesnotexist.com/image" alt="profile image">
+                <img class="w-8 h-8 object-cover rounded-full" :src="authUser.data.attributes.profile_image.data.attributes.path" alt="profile image">
             </div>
         </div>
         <div class="flex-1 mx-4 flex">
@@ -35,10 +35,10 @@ import {mapGetters} from "vuex";
 export default {
     name: "NewPost",
     computed: {
+        ...mapGetters({
+            authUser: "authUser",
+        }),
         postMessage: {
-            ...mapGetters({
-                authUser: "authUser",
-            }),
             get() {
                 return this.$store.getters.postMessage;
             },

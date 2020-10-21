@@ -1,7 +1,7 @@
 <template>
     <div>
         <img :class="classes"
-             :src="imageObject.data.attributes.path"
+             :src="userImage.data.attributes.path"
              :alt="alt"
              ref="userImage">
 
@@ -45,13 +45,11 @@ export default {
                     'X-CSRF-TOKEN': document.head.querySelector('meta[name=csrf-token]').content,
                 },
                 success: (e, res) => {
-                    this.uploadedImage = res;
-                    alert('uploaded!');
+                    this.$store.dispatch("fetchAuthUser");
+                    this.$store.dispatch("fetchUser", this.$route.params.userId);
+                    this.$store.dispatch("fetchUserPosts", this.$route.params.userId);
                 }
             }
-        },
-        imageObject() {
-            return this.uploadedImage || this.userImage;
         }
     }
 }

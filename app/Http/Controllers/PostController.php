@@ -7,6 +7,7 @@ use App\Http\Resources\PostResourceCollection;
 use App\Models\Friend;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class PostController extends Controller
 {
@@ -56,6 +57,10 @@ class PostController extends Controller
 
         if(isset($data['image'])) {
             $image = $data['image']->store('post-images', 'public');
+
+            Image::make($data['image'])
+                ->fit($data['width'], $data['height'])
+                ->save(storage_path('app/public/post-images/' . $data['image']->hashName()));
         }
 
         $post = request()->user()->posts()->create([

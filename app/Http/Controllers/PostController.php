@@ -48,10 +48,20 @@ class PostController extends Controller
     public function store()
     {
         $data = request()->validate([
-            'body' => ''
+            'body' => '',
+            'image' => '',
+            'width' => '',
+            'height' => '',
         ]);
 
-        $post = request()->user()->posts()->create($data);
+        if(isset($data['image'])) {
+            $image = $data['image']->store('post-images', 'public');
+        }
+
+        $post = request()->user()->posts()->create([
+            'body' => $data['body'],
+            'image' => $image ?? null,
+        ]);
         return new PostResource($post);
     }
 

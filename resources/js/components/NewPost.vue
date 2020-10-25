@@ -25,6 +25,23 @@
             </button>
         </div>
     </div>
+    <div class="dropzone-previews">
+        <div id="dz-template" class="hidden">
+            <div class="dz-preview dz-file-preview mt-4">
+                <div class="dz-details">
+                    <div class="flex justify-start text-sm">
+                        <div class="dz-filename pr-3"><span data-dz-name></span></div>
+                        <div class="dz-size" data-dz-size></div>
+                    </div>
+                    <img data-dz-thumbnail class="w-32 h-32">
+                    <button data-dz-remove class="text-xs py-1 px-3 bg-gray-400 rounded mt-3">Remove</button>
+                </div>
+                <div class="dz-progress">
+                    <span class="dz-upload" data-dz-upload></span>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </template>
 
@@ -58,6 +75,8 @@ export default {
                     width: 1000,
                     height: 1000,
                 },
+                previewsContainer: '.dropzone-previews',
+                previewTemplate: document.querySelector('#dz-template').innerHTML,
                 headers: {
                     'X-CSRF-TOKEN': document.head.querySelector('meta[name=csrf-token]').content,
                 },

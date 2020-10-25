@@ -84,7 +84,8 @@ export default {
                     formData.append("body", this.$store.getters.postMessage);
                 },
                 success: (event, response) => {
-                    alert("success!");
+                    this.dropzone.removeAllFiles();
+                    this.$store.commit("pushPost", response);
                 }
             }
         }
@@ -101,6 +102,7 @@ export default {
             } else {
                 this.$store.dispatch("postMessage");
             }
+            this.$store.commit("updateMessage", "");
         }
     },
     mounted() {

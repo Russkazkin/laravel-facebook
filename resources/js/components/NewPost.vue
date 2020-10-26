@@ -75,6 +75,7 @@ export default {
                     width: 1000,
                     height: 1000,
                 },
+                maxFiles: 1,
                 previewsContainer: '.dropzone-previews',
                 previewTemplate: document.querySelector('#dz-template').innerHTML,
                 headers: {
@@ -86,6 +87,10 @@ export default {
                 success: (event, response) => {
                     this.dropzone.removeAllFiles();
                     this.$store.commit("pushPost", response);
+                },
+                maxfilesexceeded: file => {
+                    this.dropzone.removeAllFiles();
+                    this.dropzone.addFile(file);
                 }
             }
         }
